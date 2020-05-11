@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 const scale = 1 / 0.375;
 
+// Taken from https://github.com/sgnh/react-trafficlight.git
+
 const TrafficLight = ({
   onRedClick,
   onYellowClick,
