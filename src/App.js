@@ -3,6 +3,7 @@ import TrafficLight from './components/TrafficLight';
 import { service } from './state-machines/LightMachine';
 import './App.css';
 
+// Constants to use when changing the light
 const RED_LIGHT = {
   RedOn: true,
   YellowOn: false,
@@ -23,6 +24,7 @@ const GREEN_LIGHT = {
 
 
 const App = () => {
+  // Initially the light is Green
   const [lightStatus, setLightStatus] = useState({
     RedOn: false,
     YellowOn: false,
@@ -35,15 +37,9 @@ const App = () => {
 
     service.onTransition(state => {
       console.log(state);
-      switch (state.value) {
-        case 'red': setLightStatus(RED_LIGHT);
-          break;
-        case 'green': setLightStatus(GREEN_LIGHT);
-          break;
-        case 'yellow': setLightStatus(YELLOW_LIGHT);
-          break;
-        default: setLightStatus(RED_LIGHT);
-      }
+      // Your code here to change lightStatus when the 
+      //   state of the state machine changes
+
     });
   }, [])
 
