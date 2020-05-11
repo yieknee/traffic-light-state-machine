@@ -1,68 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Traffic Light State Machine
 
-## Available Scripts
+In this exercise you will add a state machine to control a virtual traffic light.  This React Application has a traffic light controlled by a button. 
 
-In the project directory, you can run:
+Your task is to create an XState machine and use it to control how the traffic light appears.
 
-### `yarn start`
+## Learning Goals
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In this exercise you will
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Practice implementing a state machine using XState
+- Practice using a state machine to control a React Application
 
-### `yarn test`
+## Wave 1 - Implement a State Machine Blueprint Using XState
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In this wave go to `src/state-machines/LightMachine.js` and create this state machine in the given `createMachine` function call.
 
-### `yarn build`
+![state machine diagram](images/streetlight-state-machine.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Wave 2 - Use the State machine
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+In wave 2 you will then open `src/App.js` and edit the `service.onTransition` callback function.  In this callback function you get the current state that the application is transitioning to and you will then set the `lightStatus` to match the current state.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Additional Exercises
 
-### `yarn eject`
+You do not need to include these in the PR request, unless you want feedback, but we will review these answers in class.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1.  Consider this Finite State Machine ![exercise 1](images/ex1.png)
+    1.  Give an example of a valid input to this machine.
+    2.  Give an example of an invalid input to this machine (1s and 0s only).
+2.  For this FSM, which inputs are valid ![exercise 2](images/ex2.png)
+    1.  aaacdb
+    2.  ababacdaaac
+    3.  abcdb
+    4.  acda
+    5.  acdbdb
+3.  Draw a finite state automata that will accept the word `Banana` whilst using only 3 states.
+4.  Draw a finite state machine for the login process we discussed in class.
