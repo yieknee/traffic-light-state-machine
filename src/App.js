@@ -1,24 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import TrafficLight from './components/TrafficLight';
+import { service } from './state-machines/LightMachine';
 import './App.css';
 
-function App() {
+const RED_LIGHT = {
+  RedOn: true,
+  YellowOn: false,
+  GreenOn: false,
+}
+
+const YELLOW_LIGHT = {
+  RedOn: false,
+  YellowOn: true,
+  GreenOn: false,
+}
+
+const GREEN_LIGHT = {
+  RedOn: false,
+  YellowOn: false,
+  GreenOn: true,
+}
+
+
+const App = () => {
+  const [lightStatus, setLightStatus] = useState({
+    RedOn: false,
+    YellowOn: false,
+    GreenOn: true,
+  });
+
+  // Run once to setup the state machine
+  useEffect(() => {
+    service.start();
+
+    service.onTransition(state => {
+      console.log(state);
+      switch (state.value) {
+        case 'red': setLightStatus(RED_LIGHT);
+          break;
+        case 'green': setLightStatus(GREEN_LIGHT);
+          break;
+        case 'yellow': setLightStatus(YELLOW_LIGHT);
+          break;
+        default: setLightStatus(RED_LIGHT);
+      }
+    });
+  }, [])
+
+  const changeLight = () => {
+    console.log('changing');
+    service.send('changeLight');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <main>
+        <div>
+          <TrafficLight {...lightStatus} />
+        </div>
+        <div>
+          <button onClick={changeLight}>Change</button>
+        </div>
+      </main>
     </div>
   );
 }
