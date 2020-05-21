@@ -30,28 +30,36 @@ const App = () => {
     YellowOn: false,
     GreenOn: true,
   });
-
   // Run once to setup the state machine
   useEffect(() => {
     service.start();
-
     service.onTransition(state => {
       console.log(state);
       // Your code here to change lightStatus when the 
       //   state of the state machine changes
-
+      switch (state.value) {
+        case 'red': 
+          setLightStatus(RED_LIGHT);
+          break;
+        case 'green': 
+          setLightStatus(GREEN_LIGHT);
+          break;
+        case 'yellow': 
+          setLightStatus(YELLOW_LIGHT);
+          break;
+        default: setLightStatus(RED_LIGHT);
+      }
     });
   }, [])
-
   const changeLight = () => {
     console.log('changing');
     service.send('changeLight');
   }
-
   return (
     <div className="App">
       <header className="App-header">
       </header>
+      <h2>Yieni Traffic Light</h2>
       <main>
         <div>
           <TrafficLight {...lightStatus} />
@@ -63,5 +71,6 @@ const App = () => {
     </div>
   );
 }
+
 
 export default App;
